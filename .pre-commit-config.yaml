@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+  - repo: https://github.com/tekwizely/pre-commit-golang
+    rev: v1.0.0-beta.5
+    hooks:
+      - id: go-mod-tidy
+      - id: golangci-lint
+      - id: go-vet-repo-mod
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: bash -c "cd web && yarn eslint --fix 'src/**/*.ts*'"
+        language: node
+      - id: graphql-lint
+        name: graphql
+        entry: bash -c "cd web && yarn graphql-schema-linter --config-directory ."
+        language: node

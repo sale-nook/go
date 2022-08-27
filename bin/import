@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+function import {
+	if [ "$#" -eq 0 ]; then
+		echo "import: no arguments provided"
+		echo "import: usage: import <file> [-v]"
+		return 1
+	fi
+
+	if [ "$2" = "-v" ]; then
+		echo "sourcing $1 -> $(pwd)/bin/$1"
+	fi
+
+	source $(pwd)/bin/$1
+}

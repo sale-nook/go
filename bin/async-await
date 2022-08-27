@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+parentPID=$parentPID
+
+# Bash doesn't exit when you exit in a function (subshell)
+# so we ask the developer to init the await function with a PID
+# of the parent process. If the await-ed call doesn't exit with
+# a 0 state, it will kill the parent id.
+function await:init {
+	parentPID=$1
+}
+
+# Await the exit of a task quietly.
+function await {
+	$1 &
+	wait $!
+
+	if [ "$?" -ne "0" ]; then
+		kill "$parentPID"
+	fi
+}

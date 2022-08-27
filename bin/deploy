@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+set -eo pipefail
+PID=$(echo $$ $BASHPID)
+
+. $(pwd)/bin/import
+import "async-await" -v
+
+# Set which process to kill on finish/failure.
+await:init $PID
+
+await cdk diff

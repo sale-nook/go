@@ -1,0 +1,11 @@
+fragment FullUser on User {
+	id
+    profiles {
+      id
+      createdAt
+      createdBy
+      name
+      email
+    }
+    createdAt
+}

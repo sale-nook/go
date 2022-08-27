@@ -1,0 +1,6 @@
+.git
+.github
+.yarn
+bin
+web
+!web/api.json
