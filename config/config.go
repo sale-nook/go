@@ -27,8 +27,6 @@ type Config struct {
 	AWSRegion   *string `env:"AWS_REGION, required"`
 
 	// Integrations.
-	PlaidClientID     *string `env:"PLAID_CLIENT_ID, required"`
-	PlaidSecret       *string `env:"PLAID_SECRET, required"`
 	OAuthCallbackBase *string `env:"OAUTH_CALLBACK_ROOT,required"`
 
 	// For cdk.

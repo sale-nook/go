@@ -1,8 +1,1 @@
-{
-  "aws-appsync-go-staging-appsync": {
-    "IdentityPoolId": "eu-west-2:000000000000000000000000000000000000",
-    "UserPoolClientId": "00000000000000000000000000",
-    "AppSyncURL": "https://00000000000000000000000000.appsync-api.eu-west-2.amazonaws.com/graphql",
-    "UserPoolId": "eu-west-2_000000000"
-  }
-}
+{}

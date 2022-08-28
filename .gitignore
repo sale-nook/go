@@ -22,7 +22,7 @@
 .cdk.staging
 cdk.out
 
-# Yarn 2.0
+# Yarn 2.x
 node_modules
 .yarn/*
 !.yarn/cache

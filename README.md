@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/davemackintosh/aws-appsync-go/branch/main/graph/badge.svg?token=milTNQGLWc)](https://codecov.io/gh/davemackintosh/aws-appsync-go)
 
 <blockquote style="text-align: center; text-transform: uppercase">⚠️ This boilerplate requires configuration before use!!! Follow the instructions below carefully. ⚠️</blockquote>
+<blockquote>💰 NOTE: Current running costs are unknown, but I will add these as the data becomes more transparent.</blockquote>
 
 # Contents
 
@@ -63,12 +64,22 @@ TL;DR You'll find:
 
 ----
 
+## Who's this for?
+
+This is a boilerplate for creating a serverless application using the AWS AppSync GraphQL API while using Go for the backend and NextJS for the frontend.
+
+Typical audiences are:
+
+* CTO/CEO looking to save time and money getting a good foundation in place.
+* Developers and dev-ops teams looking to get started quickly and cheaply.
+* Anyone who wants to get a simple serverless application up and running.
+
 ## Getting started
 
-There are a few steps to getting the most out of this (early stages) boilerplate:
+There are a few steps to getting the most out of this boilerplate:
 
 1. [Installing dependencies](#installing-dependencies)
-2. [Adding AWS parameter store values](#adding-aws-parameter-store-values)
+2. [Adding AWS parameter store values](#aws-parameter-store-values)
 3. [Configuring your app](#configuring-your-app)
 4. [Deploying to AWS](#deploying-to-aws)
 5. [Running the frontend](#running-the-frontend)
@@ -78,23 +89,24 @@ There are a few steps to getting the most out of this (early stages) boilerplate
 
 # Installing Dependencies
 
-> NOTE: Current running costs are unknown, but I will add these as the data becomes more transparent.
-Before anything, you must have a valid AWS account. All the AWS services are free for the first year, and you can apply for $300 credit [here](https://aws.amazon.com/government-education/sustainability-research-credits/).
+Before anything, you **must** have a valid AWS account.
 
-## AWS Parameter Store dependencies
+All the AWS services are free for the first year, and you can apply for $300 credit [here](https://aws.amazon.com/government-education/sustainability-research-credits/).
 
-To deploy this, the following [parameter store values](https://eu-west-2.console.aws.amazon.com/systems-manager/parameters/?tab=Table) are required to be readable by a `cdk` user.
+## AWS Parameter Store values
+
+To deploy this, the following [parameter store values](https://eu-west-2.console.aws.amazon.com/systems-manager/parameters/?tab=Table) are **required** to be readable by a `cdk` user.
 Substitute `{environment}` with any of `staging, production, ci`
 
 ```bash
-/{environment}/GITHUB_ACCESS_TOKEN # Secure String
-/{environment}/OAUTH_CALLBACK_ROOT # String
+/$APP_NAME/{environment}/GITHUB_ACCESS_TOKEN # Secure String
+/$APP_NAME/{environment}/OAUTH_CALLBACK_ROOT # String
 ```
 
 ## System dependencies
 
 * [Golang 1.18+](https://golang.org/)
-* [AWS CLI](https://aws.amazon.com/cli/) and [AWS vault](https://github.com/99designs/aws-vault) to setup AWS credentials 
+* [AWS CLI](https://aws.amazon.com/cli/) and [AWS vault](https://github.com/99designs/aws-vault) to setup AWS credentials
 * [direnv](https://direnv.net/) to manage environment variables automatically.
 * [Pre-Commit](https://pre-commit.com/) for git hook code quality checks to prevent bad commits.
 * [nodeJS](https://nodejs.org) & [yarn](https://yarnpkg.com/) for managing/running frontend dependencies and [aws-cdk](https://www.npmjs.com/package/aws-cdk) for the CDK deployments.
@@ -103,7 +115,7 @@ Substitute `{environment}` with any of `staging, production, ci`
 
 ## Frontend dependencies
 
-The frontend is based on NextJS and React with TypeScript & Vitest and Cypress for testing. 
+The frontend is based on NextJS and React with TypeScript & Vitest and Cypress for testing.
 
 It uses yarn 2.x for managing dependencies.
 
@@ -122,22 +134,25 @@ Go dependencies are managed via [Go modules](https://go.dev/ref/mod) but if you 
 Edit `./.envrc` and set the following:
 
 ```bash
+APP_NAME            # The name of the application (affects import paths, should be the git repo name.)
 NGROK_DOMAIN        # This is the subdomain on ngrok you'll access the frontend from locally.
 AWS_REGION          # This is the region you'll be deploying to.
 AWS_ACCOUNT_ID      # This is the account you'll be deploying to.
 GITHUB_ACCESS_TOKEN # This is the access token you'll use to access the GitHub API.
 ```
 
-Go to Github secrets and add the following:
+Go to Github and
 
-```bash
-ENVIRONMENT
-AWS_REGION
-AWS_ACCOUNT_ID
-GITHUB_ACCESS_TOKEN
-OAUTH_CALLBACK_ROOT
-CODECOV_TOKEN
-```
+1. Generate a new personal access token for the app [here](https://github.com/settings/tokens)
+2. Go to repository secrets and add the following:
+    ```bash
+    ENVIRONMENT
+    AWS_REGION
+    AWS_ACCOUNT_ID
+    GITHUB_ACCESS_TOKEN
+    OAUTH_CALLBACK_ROOT
+    CODECOV_TOKEN
+    ```
 
 ---
 
@@ -158,4 +173,3 @@ Or you can deploy a specific environment with
 ```bash
 ENVIRONMENT={production, staging, ci} deploy
 ```
-

@@ -3394,6 +3394,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@davemackintosh/aws-appsync-go@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@davemackintosh/aws-appsync-go@workspace:."
+  dependencies:
+    aws-cdk: ^2.39.0
+    concurrently: ^7.3.0
+    ngrok: ^4.3.1
+  languageName: unknown
+  linkType: soft
+
 "@endemolshinegroup/cosmiconfig-typescript-loader@npm:3.0.2":
   version: 3.0.2
   resolution: "@endemolshinegroup/cosmiconfig-typescript-loader@npm:3.0.2"
@@ -5370,16 +5380,6 @@ __metadata:
   checksum: 0626782710ac9968da8b8c8112fcc2d6a9ffbb5a6e51779bf2a7bad9f7e1ff2561524493fa6fff78c85fce7f066f77873159002b6f47d1d25b24027e17060602
   languageName: node
   linkType: hard
-
-"aws-appsync-go@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "aws-appsync-go@workspace:."
-  dependencies:
-    aws-cdk: ^2.39.0
-    concurrently: ^7.3.0
-    ngrok: ^4.3.1
-  languageName: unknown
-  linkType: soft
 
 "aws-appsync-react@npm:^4.0.13":
   version: 4.0.13
