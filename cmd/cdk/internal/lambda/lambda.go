@@ -69,8 +69,6 @@ func GetConfigMap(stack awscdk.Stack) *map[string]*string {
 		"USER_POOL_CLIENT_ID": awscdk.Fn_ImportValue(exportNames.UserPoolClientID),                                                                                      //nolint: nosnakecase
 		"USER_POOL_ID":        awscdk.Fn_ImportValue(exportNames.UserPoolID),                                                                                            //nolint: nosnakecase
 		"GITHUB_ACCESS_TOKEN": awsssm.StringParameter_ValueFromLookup(stack, utils.ToPointer(fmt.Sprintf("/%s/%s/GITHUB_ACCESS_TOKEN", packageJSON.Name, environment))), //nolint: nosnakecase
-		"PLAID_CLIENT_ID":     awsssm.StringParameter_ValueFromLookup(stack, utils.ToPointer(fmt.Sprintf("/%s/%s/PLAID_CLIENT_ID", packageJSON.Name, environment))),     //nolint: nosnakecase
-		"PLAID_SECRET":        awsssm.StringParameter_ValueFromLookup(stack, utils.ToPointer(fmt.Sprintf("/%s/%s/PLAID_SECRET", packageJSON.Name, environment))),        //nolint: nosnakecase
 	}
 }
 

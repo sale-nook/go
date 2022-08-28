@@ -15,6 +15,7 @@ function await {
 	$1 &
 	wait $!
 
+	# shellcheck disable=SC2181
 	if [ "$?" -ne "0" ]; then
 		kill "$parentPID"
 	fi

@@ -11,5 +11,5 @@ function import {
 		echo "sourcing $1 -> $(pwd)/bin/$1"
 	fi
 
-	source $(pwd)/bin/$1
+	source "$(pwd)/bin/$1"
 }

@@ -44,8 +44,6 @@ jobs:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
         OAUTH_CALLBACK_ROOT: ${{ secrets.OAUTH_CALLBACK_ROOT }}
-        PLAID_CLIENT_ID: ${{ secrets.PLAID_CLIENT_ID }}
-        PLAID_SECRET: ${{ secrets.PLAID_SECRET }}
 
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0

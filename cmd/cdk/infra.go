@@ -19,8 +19,6 @@ func main() {
 	// Add dependencies.
 	profileStack.
 		AddDependency(apiStack, utils.ToPointer("appsync stack configures the user pool & client required for users."))
-	stacks.NewPlaidStack(app, api, infra).
-		AddDependency(profileStack, utils.ToPointer("profile stack required for users"))
 
 	app.Synth(nil)
 }

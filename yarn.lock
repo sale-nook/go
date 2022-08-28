@@ -5375,6 +5375,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aws-appsync-go@workspace:."
   dependencies:
+    aws-cdk: ^2.39.0
     concurrently: ^7.3.0
     ngrok: ^4.3.1
   languageName: unknown
@@ -5449,6 +5450,20 @@ __metadata:
   peerDependencies:
     graphql: 0.13.0 || 14.x || 15.x
   checksum: 159b5844601714e05eaf200fe5988cfcd593f3b6de754f5d5f490a04f6e1f33fb74778846287f300c07e6906631a29090e719286b887924df9442b616bae5419
+  languageName: node
+  linkType: hard
+
+"aws-cdk@npm:^2.39.0":
+  version: 2.39.0
+  resolution: "aws-cdk@npm:2.39.0"
+  dependencies:
+    fsevents: 2.3.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    cdk: bin/cdk
+  checksum: 24629e55aded9c65b79aff12b44c418a771b67f3640e1b408fc47c2762b339c30a0aa2190ca0ca0fc53ce55cfe948b62afd9a10a84b4d886c4865815cb8f0b17
   languageName: node
   linkType: hard
 
@@ -7714,7 +7729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@npm:~2.3.2":
+"fsevents@npm:2.3.2, fsevents@npm:~2.3.2":
   version: 2.3.2
   resolution: "fsevents@npm:2.3.2"
   dependencies:
@@ -7724,7 +7739,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
+"fsevents@patch:fsevents@2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
   resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
   dependencies:
