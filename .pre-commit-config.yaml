@@ -14,7 +14,9 @@ repos:
       - id: go-mod-tidy
       - id: golangci-lint
       - id: go-vet
-      - id: go-sec-mod
+      # This is commented out until https://github.com/securego/gosec/pull/817
+      # is released and confirmed fixed.
+      #- id: go-sec-mod
   - repo: local
     hooks:
       - id: eslint

@@ -21,6 +21,7 @@
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+cdk.context.json
 
 # Yarn 2.x
 node_modules

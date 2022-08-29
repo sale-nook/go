@@ -18,8 +18,6 @@ func WriteUserToTableWithClient(ctx context.Context, client *dynamodb.Client, us
 		return fmt.Errorf("error marshalling user: %w", err)
 	}
 
-	fmt.Printf("writing to %s", dal.Tables().AWSAppSyncGoUser()) // nolint: forbidigo
-
 	_, err = client.PutItem(ctx, &dynamodb.PutItemInput{
 		TableName: utils.ToPointer(dal.Tables().AWSAppSyncGoUser()),
 		Item:      record,

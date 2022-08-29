@@ -12,7 +12,6 @@
 		"dev": "yarn concurrently \"node ./web/ngrok.js\" \"yarn workspace webapp dev\" -names 'ngrok,webapp'"
 	},
 	"devDependencies": {
-		"aws-cdk": "^2.39.0",
 		"concurrently": "^7.3.0",
 		"ngrok": "^4.3.1"
 	}

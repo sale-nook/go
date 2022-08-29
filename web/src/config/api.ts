@@ -1,10 +1,9 @@
 import apiConfig from "../../../config/api.json"
 
 export interface ApiConfig {
-	UserPoolClientID: string
-	UserPoolClientSecret: string
 	IdentityPoolID: string
 	UserPoolID: string
+	UserPoolClientID: string
 	AppsyncURL: string
 	Region: string
 }
@@ -13,8 +12,8 @@ export enum configKey {
 	Staging = "aws-appsync-go-staging-appsync",
 }
 
-function mustBeSet<R extends Object>(name: string, value?: R): R {
-	if (!value || value.toString() === "") throw new Error(`${name} is not set`)
+function mustBeSet<R extends Object>(debugName: string, value?: R): R {
+	if (!value || value.toString() === "") throw new Error(`${debugName} is not set`)
 
 	return value
 }
@@ -23,14 +22,16 @@ export function getApiConfig(): ApiConfig {
 	const env = mustBeSet("ENVIRONMENT", process.env.ENVIRONMENT)
 
 	const confKey = `aws-appsync-go-${env}-appsync` as configKey
+	// If you're seeing a TypeError here, you haven't yet deployed the application to
+	// the environment you're testing against. You can do that by running `deploy`.
+	// The CDK outputs the config json to a file in `<project-root>/config/api.json`.
 	const conf = mustBeSet<typeof apiConfig["aws-appsync-go-staging-appsync"]>(confKey, apiConfig[confKey])
 
 	return {
-		UserPoolClientID: mustBeSet("UserPoolClientID", conf.UserPoolClientId),
 		UserPoolID: mustBeSet("UserPoolID", conf.UserPoolId),
+		UserPoolClientID: mustBeSet("UserPoolClientID", conf.UserPoolClientId),
 		IdentityPoolID: mustBeSet("IdentityPoolID", conf.IdentityPoolId),
 		AppsyncURL: mustBeSet("AppsyncURL", conf.AppSyncURL),
-		Region: mustBeSet("AWS_REGION", process.env.AWS_REGION),
-		UserPoolClientSecret: mustBeSet("USER_POOL_CLIENT_SECRET", process.env.USER_POOL_CLIENT_SECRET),
+		Region: mustBeSet("AWSRegion", conf.Region),
 	}
 }

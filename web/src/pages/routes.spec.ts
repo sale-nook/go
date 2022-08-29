@@ -3,21 +3,24 @@ import { AppRoutePaths, homeRoute, loginRoute, registerConfirmRoute, registerRou
 
 describe("Routes", () => {
 	test("Routes should be typesafe.", () => {
+		const email = "aws-appsync-go@aws-appsync-go.io"
 		expect(homeRoute()).toEqual(AppRoutePaths.Home)
-		expect(loginRoute()).toEqual(AppRoutePaths.Login)
+		expect(loginRoute()).toEqual({
+			pathname: AppRoutePaths.Login,
+			query: {},
+		})
 		expect(registerRoute()).toEqual(AppRoutePaths.Register)
-		expect(
-			registerConfirmRoute({
-				query: {
-					email: "aws-appsync-go@aws-appsync-go.io",
-				},
-			}),
-		).toEqual({
+		expect(registerConfirmRoute(email)).toEqual({
 			pathname: AppRoutePaths.RegisterConfirm,
 			query: {
-				email: "aws-appsync-go%40aws-appsync-go.io",
+				email: encodeURIComponent(email),
 			},
 		})
-		expect(registerConfirmRoute()).toEqual(AppRoutePaths.RegisterConfirm)
+		expect(registerConfirmRoute(email)).toEqual({
+			pathname: AppRoutePaths.RegisterConfirm,
+			query: {
+				email: encodeURIComponent(email),
+			},
+		})
 	})
 })

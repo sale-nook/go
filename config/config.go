@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	_ "embed"
-	"encoding/json"
 	"fmt"
 
 	"github.com/sethvargo/go-envconfig"
@@ -12,9 +11,7 @@ import (
 )
 
 var (
-	ErrUnknownEnvironment      = fmt.Errorf("unknown environment")
-	ErrMissingUserPoolClientID = fmt.Errorf("missing UserPoolClientID. Is ./config/api.json empty?")
-	ErrMissingUserPool         = fmt.Errorf("missing UserPool. Is ./config/api.json empty?")
+	ErrUnknownEnvironment = fmt.Errorf("unknown environment")
 )
 
 type Config struct {
@@ -33,44 +30,15 @@ type Config struct {
 	GithubAccessToken *string `env:"GITHUB_ACCESS_TOKEN,required"`
 }
 
-//go:embed api.json
-var content []byte
-
 func GetConfig() (*Config, error) {
 	var (
-		config        Config
-		cdkOutputEnvs types.CDKOutputsByEnv
-		cdkOutputs    types.CDKOutputs
+		config     Config
+		cdkOutputs types.CDKOutputs
 	)
 
 	envErr := envconfig.Process(context.Background(), &config)
 	if envErr != nil {
 		return nil, fmt.Errorf("failed to process environments in env for config %w", envErr)
-	}
-
-	err := json.Unmarshal(content, &cdkOutputEnvs)
-	if err != nil {
-		return nil, fmt.Errorf("error during config Unmarshal: %w", err)
-	}
-
-	// Now we can get the config for the current Environment
-	switch *config.Environment {
-	case "ci":
-		cdkOutputs = cdkOutputEnvs.Staging
-	case "staging":
-		cdkOutputs = cdkOutputEnvs.Staging
-	case "production":
-		cdkOutputs = cdkOutputEnvs.Production
-	default:
-		return nil, ErrUnknownEnvironment
-	}
-
-	if cdkOutputs.UserPoolClientID == nil {
-		return nil, ErrMissingUserPoolClientID
-	}
-
-	if cdkOutputs.UserPoolID == nil {
-		return nil, ErrMissingUserPool
 	}
 
 	config.UserPoolClientID = cdkOutputs.UserPoolClientID
