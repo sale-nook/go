@@ -1,13 +1,24 @@
 #!/usr/bin/env zsh
 
-. "$(pwd)/bin/import"
+set -e
+
+APP_NAME=${APP_NAME:-$(basename `git rev-parse --show-toplevel`)}
+GITHUB_USERNAME=${GITHUB_USERNAME:-$(git config user.name)}
 
 if [ "$APP_NAME" = "" ]; then
   echo "APP_NAME is not set"
   return 1
+else
+	echo "APP_NAME is set to $APP_NAME"
 fi
 
-import "async-await"
-
-await find ./ -type f -exec sed -i "s/$GITHUB_USERNAME\/aws-appsync-go/$GITHUB_USERNAME\/$APP_NAME/g" {} \;
-await find ./ -type f -exec sed -i "s/aws-appsync-go/$APP_NAME/g" {} \;
+if [ "$GITHUB_USERNAME" = "" ]; then
+  echo "GITHUB_USERNAME is not set"
+  return 1
+else
+	echo "GITHUB_USERNAME is set to $GITHUB_USERNAME"
+fi
+match="s|davemackintosh/test|$GITHUB_USERNAME/$APP_NAME|g"
+echo "match is $match"
+find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -name ".DS_Store" -not -path "./cdk.out/*" -not -name "./yarn.lock" -exec sed -i '' $match '{}' \;
+find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -name ".DS_Store" -not -path "./cdk.out/*" -not -name "./yarn.lock" -exec sed -i '' "s|test|$APP_NAME|g" '{}' \;
