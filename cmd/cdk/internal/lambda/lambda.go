@@ -78,8 +78,10 @@ func NewLambdaFunction(name string, stack awscdk.Stack, props *FunctionProps) aw
 		panic("ENVIRONMENT environment variable is not set")
 	}
 
+	packageJSON := binternal.GetApp()
+
 	buildHooks := BuildHooks{
-		GithubAccessToken: awsssm.StringParameter_ValueFromLookup(stack, utils.ToPointer(fmt.Sprintf("/%s/GITHUB_ACCESS_TOKEN", environment))), //nolint: nosnakecase
+		GithubAccessToken: awsssm.StringParameter_ValueFromLookup(stack, utils.ToPointer(fmt.Sprintf("/%s/%s/GITHUB_ACCESS_TOKEN", packageJSON.Name, environment))), //nolint: nosnakecase
 	}
 
 	funcProps := awscdklambdagoalpha.GoFunctionProps{
