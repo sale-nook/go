@@ -8,7 +8,7 @@ import (
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 
-	"github.com/davemackintosh/aws-appsync-go/config"
+	"github.com/davemackintosh/cdk-appsync-go/config"
 )
 
 func NewDynamoClientWithDefaultConfig(ctx context.Context) (*dynamodb.Client, error) {

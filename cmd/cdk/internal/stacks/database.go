@@ -2,21 +2,27 @@ package stacks
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsdynamodb"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awskms"
 
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/aws-appsync-go/internal/cdkutils"
-	"github.com/davemackintosh/aws-appsync-go/internal/dal"
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
+	"github.com/davemackintosh/cdk-appsync-go/internal/dal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 func NewDatabaseStack(app awscdk.App, _ *internal.InfraEntities) map[string]awsdynamodb.Table {
 	IDPartitionKey := utils.ToPointer("id")
-	env := internal.InfraAccountAndRegion()
+
+	env, err := internal.InfraAccountAndRegion()
+	if err != nil {
+		log.Fatalf("failed to get infra account and region %s", err)
+	}
+
 	stackName := cdkutils.NameWithEnvironment("database")
 	stack := awscdk.NewStack(app, &stackName, &awscdk.StackProps{
 		Env: env,

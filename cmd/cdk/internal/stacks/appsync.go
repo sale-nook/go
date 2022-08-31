@@ -2,6 +2,7 @@ package stacks
 
 import (
 	"io/ioutil"
+	"log"
 
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsappsync"
@@ -10,16 +11,16 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awswafv2"
 
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal/iam"
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal/lambda"
-	"github.com/davemackintosh/aws-appsync-go/internal/cdkutils"
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/lambda"
+	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 func getUserMigrateFn(stack awscdk.Stack) awslambda.Function { // nolint:ireturn
 	migrateFn := lambda.NewLambdaFunction("user-from-cognito-sign-up", stack, &lambda.FunctionProps{
-		Source:                utils.ToPointer("./cmd/create-user-from-cognito"),
+		Entry:                 utils.ToPointer("./cmd/create-user-from-cognito"),
 		RuntimeEnvironmentals: lambda.GetConfigMap(stack),
 	})
 
@@ -42,7 +43,7 @@ func getWAFFirewall(stack awscdk.Stack, appsyncAPI awsappsync.CfnGraphQLApi) {
 					InsertHeaders: &[]awswafv2.CfnWebACL_CustomHTTPHeaderProperty{ //nolint: nosnakecase
 						// Genuinly no idea why there is a requirement for this to be here but strings are needed apparently.
 						{
-							Name:  utils.ToPointer("aws-appsync-go"),
+							Name:  utils.ToPointer("cdk-appsync-go"),
 							Value: utils.ToPointer("api"),
 						},
 					},
@@ -140,16 +141,20 @@ func getUserIdentityPool(stack awscdk.Stack, userPool awscognito.UserPool, userP
 	exportNames := internal.ExportNames()
 
 	awscdk.NewCfnOutput(stack, exportNames.IdentityPoolID, &awscdk.CfnOutputProps{
-		Description: utils.ToPointer("aws-appsync-go-output: Identity Pool ID"),
-		Value:       identityPool.Ref(),
-		ExportName:  exportNames.IdentityPoolID,
+		Value:      identityPool.Ref(),
+		ExportName: exportNames.IdentityPoolID,
 	})
 
 	return identityPool
 }
 
 func getUserPoolClient(stack awscdk.Stack, userPool awscognito.UserPool) awscognito.UserPoolClient { // nolint:ireturn
-	userPoolClientName := cdkutils.NameWithStackAndEnvironment("users-aws-appsync-go-app", *stack.StackName())
+	userPoolClientName := cdkutils.NameWithStackAndEnvironment("users-cdk-appsync-go-app", *stack.StackName())
+
+	envConfing, err := internal.GetConfig()
+	if err != nil {
+		log.Fatalf("Failed to get CDK env config: %v", err)
+	}
 
 	userPoolClient := awscognito.NewUserPoolClient(stack, &userPoolClientName, &awscognito.UserPoolClientProps{
 		UserPool: userPool,
@@ -161,9 +166,7 @@ func getUserPoolClient(stack awscdk.Stack, userPool awscognito.UserPool) awscogn
 		},
 		GenerateSecret: utils.ToPointer(false),
 		OAuth: &awscognito.OAuthSettings{
-			CallbackUrls: &[]*string{
-				utils.ToPointer("http://localhost:3000/api/auth/callback/cognito"),
-			},
+			CallbackUrls: envConfing.CognitoCallbackURLS,
 			Scopes: &[]awscognito.OAuthScope{
 				awscognito.OAuthScope_EMAIL(),
 				awscognito.OAuthScope_OPENID(),
@@ -179,9 +182,8 @@ func getUserPoolClient(stack awscdk.Stack, userPool awscognito.UserPool) awscogn
 	})
 	exportNames := internal.ExportNames()
 	awscdk.NewCfnOutput(stack, exportNames.UserPoolClientID, &awscdk.CfnOutputProps{
-		Description: utils.ToPointer("aws-appsync-go-output: User Pool Client ID"),
-		Value:       userPoolClient.UserPoolClientId(),
-		ExportName:  exportNames.UserPoolClientID,
+		Value:      userPoolClient.UserPoolClientId(),
+		ExportName: exportNames.UserPoolClientID,
 	})
 
 	return userPoolClient
@@ -197,21 +199,24 @@ func getCognitoUserPool(stack awscdk.Stack, infra *internal.InfraEntities) awsco
 			Email: utils.ToPointer(true),
 		},
 		AccountRecovery: awscognito.AccountRecovery_EMAIL_ONLY,
-		RemovalPolicy:   awscdk.RemovalPolicy_RETAIN,
+		RemovalPolicy:   awscdk.RemovalPolicy_DESTROY, //nolint: nosnakecase
 	})
 
 	exportNames := internal.ExportNames()
 	awscdk.NewCfnOutput(stack, exportNames.UserPoolID, &awscdk.CfnOutputProps{
-		Description: utils.ToPointer("aws-appsync-go-output: User Pool ID"),
-		Value:       userPool.UserPoolId(),
-		ExportName:  exportNames.UserPoolID,
+		Value:      userPool.UserPoolId(),
+		ExportName: exportNames.UserPoolID,
 	})
 
 	return userPool
 }
 
 func getAppSyncAPI(stack awscdk.Stack, userPool awscognito.UserPool) awsappsync.CfnGraphQLApi { // nolint:ireturn
-	env := internal.InfraAccountAndRegion()
+	env, err := internal.InfraAccountAndRegion()
+	if err != nil {
+		log.Fatalf("Failed to get CDK env config: %v", err)
+	}
+
 	content, err := ioutil.ReadFile("./web/src/graphql/schema.graphql")
 	if err != nil {
 		panic(err)
@@ -224,7 +229,7 @@ func getAppSyncAPI(stack awscdk.Stack, userPool awscognito.UserPool) awsappsync.
 
 	appSyncName := cdkutils.NameWithEnvironment("appsync")
 	appsync := awsappsync.NewCfnGraphQLApi(stack, &appSyncName, &awsappsync.CfnGraphQLApiProps{
-		Name:               utils.ToPointer("aws-appsync-go"),
+		Name:               utils.ToPointer("cdk-appsync-go"),
 		AuthenticationType: utils.ToPointer("AWS_IAM"),
 		XrayEnabled:        utils.ToPointer(true),
 		LogConfig: &awsappsync.CfnGraphQLApi_LogConfigProperty{
@@ -246,30 +251,33 @@ func getAppSyncAPI(stack awscdk.Stack, userPool awscognito.UserPool) awsappsync.
 
 	exportNames := internal.ExportNames()
 	awscdk.NewCfnOutput(stack, exportNames.AppSyncURL, &awscdk.CfnOutputProps{
-		Description: utils.ToPointer("aws-appsync-go-output: AppSync URL"),
-		Value:       appsync.AttrGraphQlUrl(),
-		ExportName:  exportNames.AppSyncURL,
+		Value:      appsync.AttrGraphQlUrl(),
+		ExportName: exportNames.AppSyncURL,
 	})
 
 	return appsync
 }
 
 func NewAppsyncStack(app awscdk.App, infra *internal.InfraEntities) (awscdk.Stack, awsappsync.CfnGraphQLApi) { //nolint:ireturn
-	env := internal.InfraAccountAndRegion()
+	env, err := internal.InfraAccountAndRegion()
+	if err != nil {
+		log.Fatalf("Failed to get CDK env config: %v", err)
+	}
+
 	stackName := cdkutils.NameWithEnvironment("appsync")
 	stack := awscdk.NewStack(app, &stackName, &awscdk.StackProps{
 		Env: env,
 	})
 
-	infra.UserPool = getCognitoUserPool(stack, infra)
-	userPoolClient := getUserPoolClient(stack, infra.UserPool)
-	appsync := getAppSyncAPI(stack, infra.UserPool)
-	identityPool := getUserIdentityPool(stack, infra.UserPool, userPoolClient)
-	iam.GetAppSyncIAMRoles(stack, appsync, infra.UserPool, userPoolClient, identityPool)
+	userPool := getCognitoUserPool(stack, infra)
+	userPoolClient := getUserPoolClient(stack, userPool)
+	appsync := getAppSyncAPI(stack, userPool)
+	identityPool := getUserIdentityPool(stack, userPool, userPoolClient)
+	iam.GetAppSyncIAMRoles(stack, appsync, userPool, userPoolClient, identityPool)
 	// @TODO add WAF rules to rate limit requests to the API
 	// getWAFFirewall(stack, appsync)
 
-	infra.UserPool.AddTrigger(awscognito.UserPoolOperation_POST_CONFIRMATION(), getUserMigrateFn(stack)) // nolint: nosnakecase
+	userPool.AddTrigger(awscognito.UserPoolOperation_POST_CONFIRMATION(), getUserMigrateFn(stack)) //nolint: nosnakecase
 
 	return stack, appsync
 }

@@ -6,6 +6,6 @@ type App struct {
 
 func GetApp() App {
 	return App{
-		Name: "aws-appsync-go",
+		Name: "cdk-appsync-go",
 	}
 }

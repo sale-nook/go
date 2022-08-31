@@ -1,34 +1,39 @@
 package internal
 
 import (
-	"os"
+	"context"
+	"fmt"
 
 	"github.com/aws/aws-cdk-go/awscdk/v2"
+	"github.com/sethvargo/go-envconfig"
 )
 
-func requireAccountID() *string {
-	accountID := os.Getenv("AWS_ACCOUNT_ID")
-
-	if accountID == "" {
-		panic("AWS_ACCOUNT_ID is not set")
-	}
-
-	return &accountID
+type EnvironmentConfig struct {
+	AccountID           *string    `json:"accountId" env:"AWS_ACCOUNT_ID, required"`
+	Region              *string    `json:"region" env:"AWS_REGION, required"`
+	OAuthCallbackRoot   *string    `json:"oauthCallbackRoot" env:"OAUTH_CALLBACK_ROOT, required"`
+	CognitoCallbackURLS *[]*string `json:"cognitoCallbackUrls" env:"COGNITO_CALLBACK_URLS, required"`
 }
 
-func requireRegion() *string {
-	region := os.Getenv("AWS_REGION")
+func GetConfig() (*EnvironmentConfig, error) {
+	var config EnvironmentConfig
 
-	if region == "" {
-		panic("AWS_REGION is not set")
+	envErr := envconfig.Process(context.Background(), &config)
+	if envErr != nil {
+		return nil, fmt.Errorf("failed to process environments in env for cdk config %w", envErr)
 	}
 
-	return &region
+	return &config, nil
 }
 
-func InfraAccountAndRegion() *awscdk.Environment {
+func InfraAccountAndRegion() (*awscdk.Environment, error) {
+	config, err := GetConfig()
+	if err != nil {
+		return nil, err
+	}
+
 	return &awscdk.Environment{
-		Account: requireAccountID(),
-		Region:  requireRegion(),
-	}
+		Account: config.AccountID,
+		Region:  config.Region,
+	}, nil
 }

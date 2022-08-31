@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/davemackintosh/aws-appsync-go/internal/dynamo/tables"
+	"github.com/davemackintosh/cdk-appsync-go/internal/dynamo/tables"
 )
 
 const (

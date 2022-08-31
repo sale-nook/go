@@ -3,7 +3,7 @@ package internal
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscognito"
 
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 type InfraEntities struct {
@@ -19,9 +19,9 @@ type ExportName struct {
 
 func ExportNames() ExportName {
 	return ExportName{
-		IdentityPoolID:   utils.ToPointer("aws-appsync-goIdentityPoolId"),
-		UserPoolID:       utils.ToPointer("aws-appsync-goUserPoolId"),
-		UserPoolClientID: utils.ToPointer("aws-appsync-goUserPoolClientId"),
-		AppSyncURL:       utils.ToPointer("aws-appsync-goAppSyncURL"),
+		IdentityPoolID:   utils.ToPointer("IdentityPoolId"),
+		UserPoolID:       utils.ToPointer("UserPoolId"),
+		UserPoolClientID: utils.ToPointer("UserPoolClientId"),
+		AppSyncURL:       utils.ToPointer("AppSyncURL"),
 	}
 }

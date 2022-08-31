@@ -6,14 +6,17 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
 )
 
 func Test_InfraAccountAndRegion(t *testing.T) {
 	os.Setenv("AWS_ACCOUNT_ID", "account") // nolint: tenv
 	os.Setenv("AWS_REGION", "region")      // nolint: tenv
-	assert.Equal(t, "account", *internal.InfraAccountAndRegion().Account)
-	assert.Equal(t, "region", *internal.InfraAccountAndRegion().Region)
+
+	env, err := internal.InfraAccountAndRegion()
+	assert.NoError(t, err)
+	assert.Equal(t, "account", *env.Account)
+	assert.Equal(t, "region", *env.Region)
 
 	os.Unsetenv("AWS_ACCOUNT_ID")
 

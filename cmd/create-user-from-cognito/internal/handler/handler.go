@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 
-	"github.com/davemackintosh/aws-appsync-go/cmd/create-user-from-cognito/internal"
-	"github.com/davemackintosh/aws-appsync-go/internal/dynamo/tables"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/create-user-from-cognito/internal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/dynamo/tables"
 )
 
 func NewUserFromCognitoEvent(event events.CognitoEventUserPoolsPostConfirmation) (events.CognitoEventUserPoolsPostConfirmation, error) {

@@ -3,9 +3,9 @@
 set -e
 
 # Fix go imports and package.json name.
-match="s|davemackintosh/test|$GITHUB_USERNAME/$APP_NAME|g"
+match="s|davemackintosh/cdk-appsync-go|$GITHUB_USERNAME/$APP_NAME|g"
 echo "match is $match"
-find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -name ".DS_Store" -not -path "./cdk.out/*" -not -name "./yarn.lock" -exec sed -i '' $match '{}' \;
+find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -name ".DS_Store" -not -path "./cdk.out/*" -not -name "./yarn.lock" -not -name "./bin/init-project" -exec sed -i '' $match '{}' \;
 
 # Replace everything else.
-find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -name ".DS_Store" -not -path "./cdk.out/*" -not -name "./yarn.lock" -exec sed -i '' "s|test|$APP_NAME|g" '{}' \;
+find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -name ".DS_Store" -not -path "./cdk.out/*" -not -name "./yarn.lock" -not -name "./bin/init-project" -exec sed -i '' "s|cdk-appsync-go|$APP_NAME|g" '{}' \;

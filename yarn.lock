@@ -3394,9 +3394,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@davemackintosh/aws-appsync-go@workspace:.":
+"@davemackintosh/cdk-appsync-go@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@davemackintosh/aws-appsync-go@workspace:."
+  resolution: "@davemackintosh/cdk-appsync-go@workspace:."
   dependencies:
     concurrently: ^7.3.0
     ngrok: ^4.3.1

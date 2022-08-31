@@ -4,8 +4,8 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 
-	"github.com/davemackintosh/aws-appsync-go/internal/dal"
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	"github.com/davemackintosh/cdk-appsync-go/internal/dal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 type PolicyNamesRoles string

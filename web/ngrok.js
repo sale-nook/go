@@ -4,7 +4,7 @@ ngrok
 	.connect({
 		proto: "http",
 		addr: 3000,
-		subdomain: "aws-appsync-go",
+		subdomain: "cdk-appsync-go",
 		region: "eu",
 	})
 	.then((url) => {

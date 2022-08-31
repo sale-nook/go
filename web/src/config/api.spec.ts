@@ -3,11 +3,11 @@ import { getApiConfig } from "./api"
 
 vi.mock("../../../config/api.json", () => ({
 	default: {
-		"aws-appsync-go-staging-appsync": {
-			UserPoolId: "aws-appsync-go-staging-userpool",
-			UserPoolClientId: "aws-appsync-go-staging-userpool-client",
-			IdentityPoolId: "aws-appsync-go-staging-identitypool",
-			AppSyncURL: "aws-appsync-go-staging-appsync.appsync-api.eu-west-1.amazonaws.com",
+		"cdk-appsync-go-staging-appsync": {
+			UserPoolId: "cdk-appsync-go-staging-userpool",
+			UserPoolClientId: "cdk-appsync-go-staging-userpool-client",
+			IdentityPoolId: "cdk-appsync-go-staging-identitypool",
+			AppSyncURL: "cdk-appsync-go-staging-appsync.appsync-api.eu-west-1.amazonaws.com",
 		},
 	},
 }))

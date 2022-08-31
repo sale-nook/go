@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/davemackintosh/aws-appsync-go/internal"
-	"github.com/davemackintosh/aws-appsync-go/internal/cdkutils"
+	"github.com/davemackintosh/cdk-appsync-go/internal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
 )
 
 func TestNameWithEnvironment(t *testing.T) {

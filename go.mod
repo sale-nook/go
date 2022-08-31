@@ -1,4 +1,4 @@
-module github.com/davemackintosh/aws-appsync-go
+module github.com/davemackintosh/cdk-appsync-go
 
 go 1.18
 

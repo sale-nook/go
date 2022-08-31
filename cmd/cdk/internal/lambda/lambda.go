@@ -8,21 +8,21 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsappsync"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsssm"
 	"github.com/aws/aws-cdk-go/awscdklambdagoalpha/v2"
 
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal/iam"
-	binternal "github.com/davemackintosh/aws-appsync-go/internal"
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
+	binternal "github.com/davemackintosh/cdk-appsync-go/internal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 type FunctionProps struct {
-	BuildEnvironmentals   *map[string]*string
 	RuntimeEnvironmentals *map[string]*string
-	Source                *string
+	Entry                 *string
 	API                   *awsappsync.CfnGraphQLApi
 	Vpc                   *awsec2.Vpc
 	URLProps              *awslambda.FunctionUrlOptions
@@ -49,26 +49,13 @@ func (b *BuildHooks) AfterBundling(inputDir *string, outputDir *string) *[]*stri
 // GetConfigMap returns a map of config values, typycally used for
 // setting the.
 func GetConfigMap(stack awscdk.Stack) *map[string]*string {
-	packageJSON := binternal.GetApp()
-
 	environment := os.Getenv("ENVIRONMENT")
 	if environment == "" {
 		panic("ENVIRONMENT environment variable is not set")
 	}
 
-	oauthCallbackBaseURL := os.Getenv("OAUTH_CALLBACK_ROOT")
-	if oauthCallbackBaseURL == "" {
-		panic("OAUTH_CALLBACK_ROOT environment variable is not set")
-	}
-
-	exportNames := internal.ExportNames()
-
 	return &map[string]*string{
-		"ENVIRONMENT":         utils.ToPointer(environment),
-		"OAUTH_CALLBACK_ROOT": utils.ToPointer(oauthCallbackBaseURL),
-		"USER_POOL_CLIENT_ID": awscdk.Fn_ImportValue(exportNames.UserPoolClientID),                                                                                      //nolint: nosnakecase
-		"USER_POOL_ID":        awscdk.Fn_ImportValue(exportNames.UserPoolID),                                                                                            //nolint: nosnakecase
-		"GITHUB_ACCESS_TOKEN": awsssm.StringParameter_ValueFromLookup(stack, utils.ToPointer(fmt.Sprintf("/%s/%s/GITHUB_ACCESS_TOKEN", packageJSON.Name, environment))), //nolint: nosnakecase
+		"ENVIRONMENT": utils.ToPointer(environment),
 	}
 }
 
@@ -86,7 +73,7 @@ func NewLambdaFunction(name string, stack awscdk.Stack, props *FunctionProps) aw
 
 	funcProps := awscdklambdagoalpha.GoFunctionProps{
 		Timeout: awscdk.Duration_Seconds(utils.ToPointer(10.0)), // nolint: nosnakecase
-		Entry:   props.Source,
+		Entry:   props.Entry,
 		Bundling: &awscdklambdagoalpha.BundlingOptions{
 			CommandHooks: &buildHooks,
 			Environment:  props.RuntimeEnvironmentals,
@@ -117,14 +104,29 @@ func NewLambdaFunction(name string, stack awscdk.Stack, props *FunctionProps) aw
 	return newFunction
 }
 
-type ResolverCallback = func(awsappsync.CfnDataSource, awscdk.Stack, string)
+type DataResolverTypes string
 
-func CreateLambdasFromMap(stack awscdk.Stack, api awsappsync.CfnGraphQLApi, lambdaSources map[string]ResolverCallback, infra *internal.InfraEntities) map[string]awslambda.Function {
+var (
+	DataResolverTypesQUERY        = DataResolverTypes("Query")        //nolint: gochecknoglobals
+	DataResolverTypesMUTATION     = DataResolverTypes("Mutation")     //nolint: gochecknoglobals
+	DataResolverTypesSUBSCRIPTION = DataResolverTypes("Subscription") //nolint: gochecknoglobals
+)
+
+type DataResolverProps struct {
+	CmdPath       string
+	FieldName     string
+	TypeName      DataResolverTypes
+	FunctionProps FunctionProps
+	IAMPolicies   []awsiam.PolicyStatement
+}
+
+func CreateLambdasFromMap(stack awscdk.Stack, api awsappsync.CfnGraphQLApi, lambdaSources []DataResolverProps, infra *internal.InfraEntities) map[string]awslambda.Function {
 	lambdaFunctions := make(map[string]awslambda.Function)
 
-	for lambdaSource, resolverCallback := range lambdaSources {
+	for _, lambdaConfig := range lambdaSources {
+		lambdaSource := lambdaConfig.CmdPath
 		newLambda := NewLambdaFunction(lambdaSource+"-fn", stack, &FunctionProps{
-			Source:                utils.ToPointer("./cmd/" + lambdaSource),
+			Entry:                 utils.ToPointer("./cmd/" + lambdaSource),
 			RuntimeEnvironmentals: GetConfigMap(stack),
 			API:                   &api,
 		})
@@ -140,9 +142,16 @@ func CreateLambdasFromMap(stack awscdk.Stack, api awsappsync.CfnGraphQLApi, lamb
 			ServiceRoleArn: iam.GetServiceRoleFor(iam.ServiceRoleAppsyncLambda, stack).RoleArn(),
 		})
 
-		lambdaFunctions[lambdaSource] = newLambda
+		resolverName := strings.ReplaceAll(lambdaSource+"-resolver", "-", "_")
+		awsappsync.NewCfnResolver(stack, &resolverName, &awsappsync.CfnResolverProps{
+			ApiId:          api.AttrApiId(),
+			DataSourceName: ds.AttrName(),
+			FieldName:      &lambdaConfig.FieldName,
+			TypeName:       utils.ToPointer(string(lambdaConfig.TypeName)),
+		})
 
-		resolverCallback(ds, stack, lambdaSource)
+		// Push lambda function to our map.
+		lambdaFunctions[lambdaSource] = newLambda
 	}
 
 	return lambdaFunctions

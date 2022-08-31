@@ -1,9 +1,9 @@
 package dal
 
-import "github.com/davemackintosh/aws-appsync-go/internal/cdkutils"
+import "github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
 
 const (
-	TableNamesAWSAppSyncGoUser string = "aws-appsync-go_user"
+	TableNamesAWSAppSyncGoUser string = "cdk-appsync-go_user"
 	stackName                  string = "database"
 )
 

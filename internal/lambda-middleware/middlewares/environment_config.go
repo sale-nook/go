@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/davemackintosh/aws-appsync-go/config"
-	lambdamiddleware "github.com/davemackintosh/aws-appsync-go/internal/lambda-middleware"
+	"github.com/davemackintosh/cdk-appsync-go/config"
+	lambdamiddleware "github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware"
 )
 
 func EnvironmentConfig[Args any, Reply any](ctx context.Context, invocation *lambdamiddleware.Chain[Args, Reply]) (*Reply, error) {

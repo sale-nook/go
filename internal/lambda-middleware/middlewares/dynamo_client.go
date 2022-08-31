@@ -7,8 +7,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 
-	"github.com/davemackintosh/aws-appsync-go/internal/dynamo"
-	lambdamiddleware "github.com/davemackintosh/aws-appsync-go/internal/lambda-middleware"
+	"github.com/davemackintosh/cdk-appsync-go/internal/dynamo"
+	lambdamiddleware "github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware"
 )
 
 var (

@@ -25,6 +25,9 @@
 		"disable": [
 			"ifshort",
 			"gci",
+			"deadcode",
+			"varcheck",
+			"nosnakecase",
 			"gomnd",
 			"golint",
 			"maligned",

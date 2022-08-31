@@ -1,16 +1,22 @@
 package stacks
 
 import (
+	"log"
+
 	"github.com/aws/aws-cdk-go/awscdk/v2"
-	"github.com/davemackintosh/aws-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/aws-appsync-go/internal/cdkutils"
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
+	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 // NewInfraStack creates parts of our stack that aren't specific to any particular service
 // but are needed for the whole stack, things like an VPC, SSM parameters, outputs.
 func NewInfraStack(app awscdk.App) *internal.InfraEntities {
-	env := internal.InfraAccountAndRegion()
+	env, err := internal.InfraAccountAndRegion()
+	if err != nil {
+		log.Fatalf("failed to get infra account and region %s", err)
+	}
+
 	stack := awscdk.NewStack(app, utils.ToPointer(cdkutils.NameWithEnvironment("infra")), &awscdk.StackProps{
 		Env: env,
 	})

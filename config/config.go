@@ -7,7 +7,7 @@ import (
 
 	"github.com/sethvargo/go-envconfig"
 
-	"github.com/davemackintosh/aws-appsync-go/internal/types"
+	"github.com/davemackintosh/cdk-appsync-go/internal/types"
 )
 
 var (

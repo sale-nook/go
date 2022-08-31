@@ -6,10 +6,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	lambdamiddleware "github.com/davemackintosh/aws-appsync-go/internal/lambda-middleware"
-	"github.com/davemackintosh/aws-appsync-go/internal/lambda-middleware/middlewares"
-	"github.com/davemackintosh/aws-appsync-go/internal/types"
-	"github.com/davemackintosh/aws-appsync-go/internal/utils"
+	lambdamiddleware "github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware"
+	"github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware/middlewares"
+	"github.com/davemackintosh/cdk-appsync-go/internal/types"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 type TestResponse struct {
