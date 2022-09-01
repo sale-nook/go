@@ -131,6 +131,12 @@ func CreateLambdasFromMap(stack awscdk.Stack, api awsappsync.CfnGraphQLApi, lamb
 			API:                   &api,
 		})
 
+		if lambdaConfig.IAMPolicies != nil {
+			for _, policy := range lambdaConfig.IAMPolicies {
+				newLambda.AddToRolePolicy(policy)
+			}
+		}
+
 		dataSourceName := strings.ReplaceAll(lambdaSource+"-data-source", "-", "_")
 		ds := awsappsync.NewCfnDataSource(stack, &dataSourceName, &awsappsync.CfnDataSourceProps{
 			ApiId: api.AttrApiId(),

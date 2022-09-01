@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { PropsWithChildren, useEffect } from "react"
 import { ApolloWrapper } from "src/providers/apollo"
 import { UserProvider, useUser } from "src/providers/user"
+import "../styles/global.css"
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 	return (

@@ -15,19 +15,12 @@ var (
 )
 
 type Config struct {
-	// From outputs of cdk.
-	UserPoolClientID *string
-	UserPoolID       *string
-
-	// From env variables.
-	Environment *string `env:"ENVIRONMENT"`
-	AWSRegion   *string `env:"AWS_REGION, required"`
-
-	// Integrations.
-	OAuthCallbackBase *string `env:"OAUTH_CALLBACK_ROOT,required"`
-
-	// For cdk.
-	GithubAccessToken *string `env:"GITHUB_ACCESS_TOKEN,required"`
+	UserPoolClientID  *string
+	UserPoolID        *string
+	Environment       *string `env:"ENVIRONMENT"`
+	AWSRegion         *string `env:"AWS_REGION, required"`
+	OAuthCallbackBase *string `env:"OAUTH_CALLBACK_ROOT"`
+	GithubAccessToken *string `env:"GITHUB_ACCESS_TOKEN"`
 }
 
 func GetConfig() (*Config, error) {

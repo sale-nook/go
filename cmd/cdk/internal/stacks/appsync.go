@@ -279,5 +279,10 @@ func NewAppsyncStack(app awscdk.App, infra *internal.InfraEntities) (awscdk.Stac
 
 	userPool.AddTrigger(awscognito.UserPoolOperation_POST_CONFIRMATION(), getUserMigrateFn(stack)) //nolint: nosnakecase
 
+	// Write the region to the outputs.
+	awscdk.NewCfnOutput(stack, utils.ToPointer("Region"), &awscdk.CfnOutputProps{
+		Value: env.Region,
+	})
+
 	return stack, appsync
 }

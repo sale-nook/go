@@ -2,10 +2,9 @@
   "cdk-appsync-go-staging-appsync": {
     "UserPoolClientId": "3bkf69d82smvjihiuc4qchm0mo",
     "UserPoolId": "eu-west-2_D2Q4Hz4TD",
+    "ExportsOutputFnGetAttcdkappsyncgostagingappsyncApiId146AA781": "zabbxl5b5zepdfiemqqpeuzsxm",
     "AppSyncURL": "https://uqypf3dff5ak3ho3s5ree6tjja.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "Region": "eu-west-2",
     "IdentityPoolId": "eu-west-2:6c569567-2872-41fe-b670-268f3891d49f"
-  },
-  "cdk-appsync-go-staging-infra": {
-    "cdkappsyncgostagingregion": "eu-west-2"
   }
 }
