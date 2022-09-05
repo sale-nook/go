@@ -1,4 +1,5 @@
 # cdk-appsync-go
+
 ![Backend Build status](https://github.com/davemackintosh/cdk-appsync-go/actions/workflows/go.yml/badge.svg?branch=main)
 ![Frontend Build status](https://github.com/davemackintosh/cdk-appsync-go/actions/workflows/web.yml/badge.svg?branch=main)
 [![codecov](https://codecov.io/gh/davemackintosh/cdk-appsync-go/branch/main/graph/badge.svg?token=milTNQGLWc)](https://codecov.io/gh/davemackintosh/cdk-appsync-go)
@@ -9,16 +10,16 @@
 # Contents
 
 1. [Description](#description)
-2. [Getting Started](#getting-started)
-    1. [Installing dependencies](#installing-dependencies)
-    2. [Configuring your app](#configuring-your-app)
-    3. [Deploying to AWS](#deploying-to-aws)
-    4. [Running the frontend](#running-the-frontend)
-    5. [Testing your app](#testing-your-app)
+1. [Getting Started](#getting-started)
+   1. [Installing dependencies](#installing-dependencies)
+   1. [Configuring your app](#configuring-your-app)
+   1. [Deploying to AWS](#deploying-to-aws)
+   1. [Running the frontend](#running-the-frontend)
+   1. [Testing your app](#testing-your-app)
 
-----
+______________________________________________________________________
 
-# Description
+## Description
 
 This is a boilerplate Golang, NextJS/React application which features the following:
 
@@ -26,11 +27,11 @@ This is a boilerplate Golang, NextJS/React application which features the follow
   - Middleware pattern and library for lambda function handlers.
   - Hexagonal architecture/adapter based for the backend.
 - [CDK](https://aws.amazon.com/cdk/) (written in Golang) to deploy the application to the cloud.
-  - [Lambda serverless functions](https://aws.amazon.com/lambda/)
-  - [DynamoDB tables and triggers with point in time recovery](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Tables.html)
-  - [KMS encryption](https://docs.aws.amazon.com/kms/latest/developerguide/services-dynamodb.html)
-  - [Cognito User & Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-settings-attributes.html)
-  - [AWS AppSync](https://aws.amazon.com/appsync/) authorised and unauthorised access via [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
+- [Lambda serverless functions](https://aws.amazon.com/lambda/)
+- [DynamoDB tables and triggers with point in time recovery](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Tables.html)
+- [KMS encryption](https://docs.aws.amazon.com/kms/latest/developerguide/services-dynamodb.html)
+- [Cognito User & Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-settings-attributes.html)
+- [AWS AppSync](https://aws.amazon.com/appsync/) authorised and unauthorised access via [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
 - [Github Actions](https://github.com/features/actions)
   - Runs go tests
   - Runs frontend tests
@@ -58,42 +59,42 @@ This repository follows [these standards](https://github.com/golang-standards/pr
 
 TL;DR You'll find:
 
-* Private code in `/internal`
-* Lambda and other command type functions in `/cmd`
-* Frontend in `/web`
+- Private code in `/internal`
+- Lambda and other command type functions in `/cmd`
+- Frontend in `/web`
 
-----
+______________________________________________________________________
 
-## Who's this for?
+## Who's this for
 
 This is a boilerplate for creating a serverless application using the AWS AppSync GraphQL API while using Go for the backend and NextJS for the frontend.
 
 Typical audiences are:
 
-* CTO/CEO looking to save time and money getting a good foundation in place.
-* Developers and dev-ops teams looking to get started quickly and cheaply.
-* Anyone who wants to get a simple serverless application up and running.
+- CTO/CEO looking to save time and money getting a good foundation in place.
+- Developers and dev-ops teams looking to get started quickly and cheaply.
+- Anyone who wants to get a simple serverless application up and running.
 
 ## Getting started
 
 There are a few steps to getting the most out of this boilerplate:
 
 1. [Installing dependencies](#installing-dependencies)
-2. [Adding AWS parameter store values](#aws-parameter-store-values)
-3. [Configuring your app](#configuring-your-app)
-4. [Deploying to AWS](#deploying-to-aws)
-5. [Running the frontend](#running-the-frontend)
-6. [Testing your app](#testing-your-app)
+1. [Adding AWS parameter store values](#aws-parameter-store-values)
+1. [Configuring your app](#configuring-your-app)
+1. [Deploying to AWS](#deploying-to-aws)
+1. [Running the frontend](#running-the-frontend)
+1. [Testing your app](#testing-your-app)
 
-----
+______________________________________________________________________
 
-# Installing Dependencies
+## Installing Dependencies
 
 Before anything, you **must** have a valid AWS account.
 
 All the AWS services are free for the first year, and you can apply for $300 credit [here](https://aws.amazon.com/government-education/sustainability-research-credits/).
 
-## AWS Parameter Store values
+### AWS Parameter Store values
 
 To deploy this, the following [parameter store values](https://eu-west-2.console.aws.amazon.com/systems-manager/parameters/?tab=Table) are **required** to be readable by a `cdk` user.
 Substitute `{environment}` with any of `staging, production, ci`
@@ -103,17 +104,17 @@ Substitute `{environment}` with any of `staging, production, ci`
 /$APP_NAME/{environment}/OAUTH_CALLBACK_ROOT # String
 ```
 
-## System dependencies
+### System dependencies
 
-* [Golang 1.18+](https://golang.org/)
-* [AWS CLI](https://aws.amazon.com/cli/) and [AWS vault](https://github.com/99designs/aws-vault) to setup AWS credentials
-* [direnv](https://direnv.net/) to manage environment variables automatically.
-* [Pre-Commit](https://pre-commit.com/) for git hook code quality checks to prevent bad commits.
-* [nodeJS](https://nodejs.org) & [yarn](https://yarnpkg.com/) for managing/running frontend dependencies and [aws-cdk](https://www.npmjs.com/package/aws-cdk) for the CDK deployments.
-* `python3.x`
-  * This is needed for serving the graphql schema for graphql-codegen over http. (This will be moved to a NodeJS solution soon but `python -m http.server` is fine for now.)
+- [Golang 1.18+](https://golang.org/)
+- [AWS CLI](https://aws.amazon.com/cli/) and [AWS vault](https://github.com/99designs/aws-vault) to setup AWS credentials
+- [direnv](https://direnv.net/) to manage environment variables automatically.
+- [Pre-Commit](https://pre-commit.com/) for git hook code quality checks to prevent bad commits.
+- [nodeJS](https://nodejs.org) & [yarn](https://yarnpkg.com/) for managing/running frontend dependencies and [aws-cdk](https://www.npmjs.com/package/aws-cdk) for the CDK deployments.
+- `python3.x`
+  - This is needed for serving the graphql schema for graphql-codegen over http. (This will be moved to a NodeJS solution soon but `python -m http.server` is fine for now.)
 
-## Frontend dependencies
+### Frontend dependencies
 
 The frontend is based on NextJS and React with TypeScript & Vitest and Cypress for testing.
 
@@ -127,9 +128,9 @@ Running `yarn install` will install all frontend dependencies.
 
 Go dependencies are managed via [Go modules](https://go.dev/ref/mod) but if you want to download them ahead of time you can run `go mod download` to download them.
 
-----
+______________________________________________________________________
 
-#### Setting up environmentals.
+#### Setting up environmentals
 
 Edit `./.envrc` and set the following:
 
@@ -144,17 +145,17 @@ GITHUB_ACCESS_TOKEN # This is the access token you'll use to access the GitHub A
 Go to Github and
 
 1. Generate a new personal access token for the app [here](https://github.com/settings/tokens)
-2. Go to repository secrets and add the following:
-    ```bash
-    ENVIRONMENT
-    AWS_REGION
-    AWS_ACCOUNT_ID
-    GITHUB_ACCESS_TOKEN
-    OAUTH_CALLBACK_ROOT
-    CODECOV_TOKEN
-    ```
+1. Go to repository secrets and add the following:
+   ```bash
+   ENVIRONMENT
+   AWS_REGION
+   AWS_ACCOUNT_ID
+   GITHUB_ACCESS_TOKEN
+   OAUTH_CALLBACK_ROOT
+   CODECOV_TOKEN
+   ```
 
----
+______________________________________________________________________
 
 ## Configuring your app
 
