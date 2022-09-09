@@ -13,3 +13,11 @@ body {
 main {
 	padding: 0 1.0875rem 1.45rem;
 }
+
+a {
+	color: #003f34;
+}
+
+::selection {
+	background-color: #5E81AC;
+}

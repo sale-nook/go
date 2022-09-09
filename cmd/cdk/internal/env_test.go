@@ -20,7 +20,12 @@ func Test_InfraAccountAndRegion(t *testing.T) {
 
 	os.Unsetenv("AWS_ACCOUNT_ID")
 
-	assert.Panics(t, func() { internal.InfraAccountAndRegion() })
+	_, err = internal.InfraAccountAndRegion()
+
+	assert.NotNil(t, err)
 	os.Unsetenv("AWS_REGION")
-	assert.Panics(t, func() { internal.InfraAccountAndRegion() })
+
+	_, err = internal.InfraAccountAndRegion()
+
+	assert.NotNil(t, err)
 }

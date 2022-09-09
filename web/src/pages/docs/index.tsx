@@ -1,8 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import { Header } from "src/components/Header"
-import { useUser } from "src/providers/user"
-import { Contents } from "src/components/docs/Contents"
+import { Contents } from "src/components/DOTs/docs/Contents"
 
 export default function DocsIndex() {
 	return (
