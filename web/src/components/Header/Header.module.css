@@ -1,0 +1,32 @@
+.headerContainer {
+	background-color: #000;
+	margin-bottom: 1.45rem;
+	padding: 1.45rem 1.0875rem;
+}
+
+.navBar {
+	display: flex;
+	flex-direction: row;
+}
+
+.navColumn {
+	flex: 1;
+}
+
+.navColumn:nth-child(2) {
+	text-align: right;
+}
+
+.navLink {
+	color: #fff;
+	text-decoration: none;
+	padding: 1.45rem;
+}
+
+.navLink:hover {
+	color: pink;
+}
+
+.pretendLogo {
+	text-transform: uppercase;
+}

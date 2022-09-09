@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "concurrently \"next dev\" \"yarn serve-schema\" \"DEBUG=1 yarn generate --watch\"",
+		"dev": "concurrently \"next dev\" \"yarn serve-schema\" \"DEBUG=1 yarn generate --watch\" -n \"next,serve-schema,generate-api-sdk\"",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -11,7 +11,7 @@
 		"prestart": "yarn generate",
 		"predev": "yarn generate",
 		"test": "vitest run --coverage",
-		"serve-schema": "cd src/graphql && python -m http.server"
+		"serve-schema": "node ./serve-schema.js"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.6.9",

@@ -10,7 +10,7 @@ export default function LoginPage() {
 	const [loading, setLoading] = useState(false)
 	const emailRef = useRef<HTMLInputElement>(null)
 	const passwordRef = useRef<HTMLInputElement>(null)
-	const router = useRouter()
+const router = useRouter()
 
 	const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(async (e) => {
 		e.preventDefault()

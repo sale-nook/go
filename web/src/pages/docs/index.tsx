@@ -20,7 +20,7 @@ export default function DocsIndex() {
 					<ul>
 						<li>
 							<Link href="https://golang.org/">
-								<a>GO</a>
+								<a>Go</a>
 							</Link>{" "}
 							for all the backend and CDK.
 							<ul>
