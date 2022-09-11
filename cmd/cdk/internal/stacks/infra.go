@@ -3,11 +3,14 @@ package stacks
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
+	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
+	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
 )
 
 // NewInfraStack creates parts of our stack that aren't specific to any particular service
 // but are needed for the whole stack, things like an VPC, SSM parameters, outputs.
 func NewInfraStack(app awscdk.App) *internal.InfraEntities {
+	stack := awscdk.NewStack(app, utils.ToPointer("InfraStack"), nil)
 
 	// No need for public subnets in our application
 	// so this is commented out but if you want to use it
@@ -28,6 +31,9 @@ func NewInfraStack(app awscdk.App) *internal.InfraEntities {
 			},
 		},
 	})*/
+
+	// Set up the Github OIDC provider.
+	iam.GithubOIDCProvider(stack)
 
 	return &internal.InfraEntities{}
 }
