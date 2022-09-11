@@ -1,5 +1,5 @@
 {
-  "cdk-appsync-go-staging-appsync": {
+  "go-staging-appsync": {
     "UserPoolClientId": "3bkf69d82smvjihiuc4qchm0mo",
     "UserPoolId": "eu-west-2_D2Q4Hz4TD",
     "ExportsOutputFnGetAttcdkappsyncgostagingappsyncApiId146AA781": "zabbxl5b5zepdfiemqqpeuzsxm",

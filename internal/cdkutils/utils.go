@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/davemackintosh/cdk-appsync-go/internal"
+	"github.com/davemackintosh/go/internal"
 )
 
 func trimAllPrefixes(name, prefix string) string {

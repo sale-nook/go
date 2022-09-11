@@ -4,7 +4,7 @@ ngrok
 	.connect({
 		proto: "http",
 		addr: 3000,
-		subdomain: "cdk-appsync-go",
+		subdomain: "go",
 		region: "eu",
 		configPath: "/home/dave/.config/ngrok/ngrok.yml",
 	})

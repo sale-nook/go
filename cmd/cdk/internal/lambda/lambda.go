@@ -14,10 +14,10 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsssm"
 	"github.com/aws/aws-cdk-go/awscdklambdagoalpha/v2"
 
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
-	binternal "github.com/davemackintosh/cdk-appsync-go/internal"
-	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
+	"github.com/davemackintosh/go/cmd/cdk/internal"
+	"github.com/davemackintosh/go/cmd/cdk/internal/iam"
+	binternal "github.com/davemackintosh/go/internal"
+	"github.com/davemackintosh/go/internal/utils"
 )
 
 type FunctionProps struct {

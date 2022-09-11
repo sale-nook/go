@@ -11,11 +11,11 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awswafv2"
 
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/lambda"
-	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
-	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
+	"github.com/davemackintosh/go/cmd/cdk/internal"
+	"github.com/davemackintosh/go/cmd/cdk/internal/iam"
+	"github.com/davemackintosh/go/cmd/cdk/internal/lambda"
+	"github.com/davemackintosh/go/internal/cdkutils"
+	"github.com/davemackintosh/go/internal/utils"
 )
 
 func getUserMigrateFn(stack awscdk.Stack) awslambda.Function { // nolint:ireturn
@@ -43,7 +43,7 @@ func getWAFFirewall(stack awscdk.Stack, appsyncAPI awsappsync.CfnGraphQLApi) {
 					InsertHeaders: &[]awswafv2.CfnWebACL_CustomHTTPHeaderProperty{ //nolint: nosnakecase
 						// Genuinly no idea why there is a requirement for this to be here but strings are needed apparently.
 						{
-							Name:  utils.ToPointer("cdk-appsync-go"),
+							Name:  utils.ToPointer("go"),
 							Value: utils.ToPointer("api"),
 						},
 					},
@@ -149,7 +149,7 @@ func getUserIdentityPool(stack awscdk.Stack, userPool awscognito.UserPool, userP
 }
 
 func getUserPoolClient(stack awscdk.Stack, userPool awscognito.UserPool) awscognito.UserPoolClient { // nolint:ireturn
-	userPoolClientName := cdkutils.NameWithStackAndEnvironment("users-cdk-appsync-go-app", *stack.StackName())
+	userPoolClientName := cdkutils.NameWithStackAndEnvironment("users-go-app", *stack.StackName())
 
 	envConfing, err := internal.GetConfig()
 	if err != nil {
@@ -229,7 +229,7 @@ func getAppSyncAPI(stack awscdk.Stack, userPool awscognito.UserPool) awsappsync.
 
 	appSyncName := cdkutils.NameWithEnvironment("appsync")
 	appsync := awsappsync.NewCfnGraphQLApi(stack, &appSyncName, &awsappsync.CfnGraphQLApiProps{
-		Name:               utils.ToPointer("cdk-appsync-go"),
+		Name:               utils.ToPointer("go"),
 		AuthenticationType: utils.ToPointer("AWS_IAM"),
 		XrayEnabled:        utils.ToPointer(true),
 		LogConfig: &awsappsync.CfnGraphQLApi_LogConfigProperty{

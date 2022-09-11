@@ -1,4 +1,4 @@
-module github.com/davemackintosh/cdk-appsync-go
+module github.com/davemackintosh/go
 
 go 1.18
 

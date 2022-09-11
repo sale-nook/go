@@ -2,9 +2,9 @@ package stacks
 
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
-	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
+	"github.com/davemackintosh/go/cmd/cdk/internal"
+	"github.com/davemackintosh/go/cmd/cdk/internal/iam"
+	"github.com/davemackintosh/go/internal/utils"
 )
 
 // NewInfraStack creates parts of our stack that aren't specific to any particular service

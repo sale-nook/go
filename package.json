@@ -1,5 +1,5 @@
 {
-	"name": "@davemackintosh/cdk-appsync-go",
+	"name": "@davemackintosh/go",
 	"private": true,
 	"version": "1.0.0",
 	"description": "Golang serverless application featuring Cognito, user pools, user identity pool, dynamoDB + KMS, CDK (in golang) with a Next JS/TypeScript frontend + Apollo and GraphQL Codegen/linting",

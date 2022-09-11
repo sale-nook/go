@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/stacks"
-	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
+	"github.com/davemackintosh/go/cmd/cdk/internal/stacks"
+	"github.com/davemackintosh/go/internal/utils"
 )
 
 func main() {

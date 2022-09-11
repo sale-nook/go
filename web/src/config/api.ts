@@ -9,7 +9,7 @@ export interface ApiConfig {
 }
 
 export enum configKey {
-	Staging = "cdk-appsync-go-staging-appsync",
+	Staging = "go-staging-appsync",
 }
 
 function mustBeSet<R extends Object>(debugName: string, value?: R): R {
@@ -21,11 +21,11 @@ function mustBeSet<R extends Object>(debugName: string, value?: R): R {
 export function getApiConfig(): ApiConfig {
 	const env = mustBeSet("ENVIRONMENT", process.env.ENVIRONMENT)
 
-	const confKey = `cdk-appsync-go-${env}-appsync` as configKey
+	const confKey = `go-${env}-appsync` as configKey
 	// If you're seeing a TypeError here, you haven't yet deployed the application to
 	// the environment you're testing against. You can do that by running `deploy`.
 	// The CDK outputs the config json to a file in `<project-root>/config/api.json`.
-	const conf = mustBeSet<typeof apiConfig["cdk-appsync-go-staging-appsync"]>(confKey, apiConfig[confKey])
+	const conf = mustBeSet<typeof apiConfig["go-staging-appsync"]>(confKey, apiConfig[confKey])
 
 	return {
 		UserPoolID: mustBeSet("UserPoolID", conf.UserPoolId),

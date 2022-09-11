@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/davemackintosh/cdk-appsync-go/internal"
-	"github.com/davemackintosh/cdk-appsync-go/internal/dal"
+	"github.com/davemackintosh/go/internal"
+	"github.com/davemackintosh/go/internal/dal"
 )
 
 func TestTables(t *testing.T) {

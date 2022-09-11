@@ -3996,9 +3996,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@davemackintosh/cdk-appsync-go@workspace:.":
+"@davemackintosh/go@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@davemackintosh/cdk-appsync-go@workspace:."
+  resolution: "@davemackintosh/go@workspace:."
   dependencies:
     concurrently: ^7.3.0
     ngrok: ^4.3.1

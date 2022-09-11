@@ -8,13 +8,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 
-	"github.com/davemackintosh/cdk-appsync-go/internal/dal"
-	"github.com/davemackintosh/cdk-appsync-go/internal/dynamo"
-	"github.com/davemackintosh/cdk-appsync-go/internal/dynamo/tables"
-	lambdamiddleware "github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware"
-	"github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware/middlewares"
-	wikitypes "github.com/davemackintosh/cdk-appsync-go/internal/types"
-	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
+	"github.com/davemackintosh/go/internal/dal"
+	"github.com/davemackintosh/go/internal/dynamo"
+	"github.com/davemackintosh/go/internal/dynamo/tables"
+	lambdamiddleware "github.com/davemackintosh/go/internal/lambda-middleware"
+	"github.com/davemackintosh/go/internal/lambda-middleware/middlewares"
+	wikitypes "github.com/davemackintosh/go/internal/types"
+	"github.com/davemackintosh/go/internal/utils"
 )
 
 func GetProfile(ctx context.Context, event wikitypes.AppSyncLambdaIdentityEvent[any]) (*tables.User, error) {

@@ -7,10 +7,10 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsappsync"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/iam"
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal/lambda"
-	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
+	"github.com/davemackintosh/go/cmd/cdk/internal"
+	"github.com/davemackintosh/go/cmd/cdk/internal/iam"
+	"github.com/davemackintosh/go/cmd/cdk/internal/lambda"
+	"github.com/davemackintosh/go/internal/cdkutils"
 )
 
 func NewProfileStack(app awscdk.App, api awsappsync.CfnGraphQLApi, infra *internal.InfraEntities) awscdk.Stack { //nolint:ireturn

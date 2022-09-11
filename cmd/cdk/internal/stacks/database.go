@@ -9,10 +9,10 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awskms"
 
-	"github.com/davemackintosh/cdk-appsync-go/cmd/cdk/internal"
-	"github.com/davemackintosh/cdk-appsync-go/internal/cdkutils"
-	"github.com/davemackintosh/cdk-appsync-go/internal/dal"
-	"github.com/davemackintosh/cdk-appsync-go/internal/utils"
+	"github.com/davemackintosh/go/cmd/cdk/internal"
+	"github.com/davemackintosh/go/internal/cdkutils"
+	"github.com/davemackintosh/go/internal/dal"
+	"github.com/davemackintosh/go/internal/utils"
 )
 
 func NewDatabaseStack(app awscdk.App, _ *internal.InfraEntities) map[string]awsdynamodb.Table {

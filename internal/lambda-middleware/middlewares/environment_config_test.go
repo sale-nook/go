@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	lambdamiddleware "github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware"
-	"github.com/davemackintosh/cdk-appsync-go/internal/lambda-middleware/middlewares"
-	"github.com/davemackintosh/cdk-appsync-go/internal/types"
+	lambdamiddleware "github.com/davemackintosh/go/internal/lambda-middleware"
+	"github.com/davemackintosh/go/internal/lambda-middleware/middlewares"
+	"github.com/davemackintosh/go/internal/types"
 )
 
 type TestReply struct {

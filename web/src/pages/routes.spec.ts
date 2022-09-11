@@ -3,7 +3,7 @@ import { AppRoutePaths, homeRoute, loginRoute, registerConfirmRoute, registerRou
 
 describe("Routes", () => {
 	test("Routes should be typesafe.", () => {
-		const email = "cdk-appsync-go@cdk-appsync-go.io"
+		const email = "go@go.io"
 		expect(homeRoute()).toEqual(AppRoutePaths.Home)
 		expect(loginRoute()).toEqual({
 			pathname: AppRoutePaths.Login,
