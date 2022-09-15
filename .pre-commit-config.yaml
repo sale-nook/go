@@ -17,13 +17,3 @@ repos:
       # This is commented out until https://github.com/securego/gosec/pull/817
       # is released and confirmed fixed.
       #- id: go-sec-mod
-  - repo: local
-    hooks:
-      - id: eslint
-        name: eslint
-        entry: bash -c "cd web && yarn eslint --fix 'src/**/*.ts*'"
-        language: node
-      - id: graphql-lint
-        name: graphql
-        entry: bash -c "cd web && yarn graphql-schema-linter --config-directory ."
-        language: node
