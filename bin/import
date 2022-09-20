@@ -7,9 +7,14 @@ function import {
 		return 1
 	fi
 
-	if [ "$2" = "-v" ]; then
-		echo "sourcing $1 -> $(pwd)/bin/$1"
+	local file=$1
+	if [[ -f $file ]]; then
+		if [ "$2" = "-v" ]; then
+			echo "sourcing $1 -> $(pwd)/bin/$1"
+		fi
+		source $file
+	else
+		echo "Import not found: $file"
 	fi
 
-	source "$(pwd)/bin/$1"
 }

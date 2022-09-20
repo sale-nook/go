@@ -111,8 +111,6 @@ Substitute `{environment}` with any of `staging, production, ci`
 - [direnv](https://direnv.net/) to manage environment variables automatically.
 - [Pre-Commit](https://pre-commit.com/) for git hook code quality checks to prevent bad commits.
 - [nodeJS](https://nodejs.org) & [yarn](https://yarnpkg.com/) for managing/running frontend dependencies and [aws-cdk](https://www.npmjs.com/package/aws-cdk) for the CDK deployments.
-- `python3.x`
-  - This is needed for serving the graphql schema for graphql-codegen over http. (This will be moved to a NodeJS solution soon but `python -m http.server` is fine for now.)
 
 ### Frontend dependencies
 

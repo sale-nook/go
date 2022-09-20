@@ -17,7 +17,7 @@ fi
 
 
 # Fix go imports and package.json name.
-match="s|davemackintosh/cdk-appsync-go|$GITHUB_USERNAME/$APP_NAME|g"
+match="s|dotsboilerplates/go|$GITHUB_USERNAME/$APP_NAME|g"
 echo "match is $match"
 find . -type f -not -path "./node_modules/*" -not -path "./.git/*" -not -path "./.idea/*" -not -path "./web/coverage/*" -not -path "./web/.next/*" -not -path "./web/.yarn" -not -path "./.yarn/*" -not -wholename ".DS_Store" -not -path "./cdk.out/*" -not -wholename "./yarn.lock" -not -wholename "./bin/init-project" -exec sed -i $match '{}' \;
 
