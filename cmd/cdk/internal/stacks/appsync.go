@@ -204,6 +204,7 @@ func getUserPool(stack awscdk.Stack, infra *internal.InfraEntities) awscognito.U
 
 	userPoolGroups := iam.GetUserPoolGroups()
 	for id, group := range userPoolGroups {
+		group.UserPoolId = userPool.UserPoolId()
 		awscognito.NewCfnUserPoolGroup(stack, utils.ToPointer(id), group)
 	}
 
