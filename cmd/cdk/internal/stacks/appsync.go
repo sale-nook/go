@@ -11,11 +11,11 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awswafv2"
 
-	"github.com/davemackintosh/go/cmd/cdk/internal"
-	"github.com/davemackintosh/go/cmd/cdk/internal/iam"
-	"github.com/davemackintosh/go/cmd/cdk/internal/lambda"
-	"github.com/davemackintosh/go/internal/cdkutils"
-	"github.com/davemackintosh/go/internal/utils"
+	"github.com/warpspeedboilerplate/go/cmd/cdk/internal"
+	"github.com/warpspeedboilerplate/go/cmd/cdk/internal/iam"
+	"github.com/warpspeedboilerplate/go/cmd/cdk/internal/lambda"
+	"github.com/warpspeedboilerplate/go/internal/cdkutils"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 func getUserMigrateFn(stack awscdk.Stack) awslambda.Function { // nolint:ireturn

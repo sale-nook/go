@@ -3,7 +3,8 @@ package iam
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
-	"github.com/davemackintosh/go/internal/utils"
+
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 func GithubOIDCProvider(stack awscdk.Stack) {
@@ -29,7 +30,7 @@ func GithubOIDCProvider(stack awscdk.Stack) {
 				provider.OpenIdConnectProviderArn(),
 				&map[string]interface{}{
 					"StringLike": &map[string]interface{}{
-						"token.actions.githubusercontent.com:sub": "repo:davemackintosh/go:*",
+						"token.actions.githubusercontent.com:sub": "repo:warpspeedboilerplate/go:*",
 					},
 				},
 			),

@@ -7,9 +7,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 
-	"github.com/davemackintosh/go/internal/dal"
-	"github.com/davemackintosh/go/internal/dynamo/tables"
-	"github.com/davemackintosh/go/internal/utils"
+	"github.com/warpspeedboilerplate/go/internal/dal"
+	"github.com/warpspeedboilerplate/go/internal/dynamo/tables"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 func WriteUserToTableWithClient(ctx context.Context, client *dynamodb.Client, user tables.User) error {

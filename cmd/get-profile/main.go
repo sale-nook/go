@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/aws/aws-lambda-go/lambda"
 
-	"github.com/davemackintosh/go/cmd/get-profile/handler"
+	"github.com/warpspeedboilerplate/go/cmd/get-profile/handler"
 )
 
 func main() {

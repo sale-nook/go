@@ -2,7 +2,8 @@ package iam
 
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscognito"
-	"github.com/davemackintosh/go/internal/utils"
+
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 func GetUserPoolGroups() map[string]*awscognito.CfnUserPoolGroupProps {

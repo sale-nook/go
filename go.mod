@@ -1,4 +1,4 @@
-module github.com/davemackintosh/go
+module github.com/warpspeedboilerplate/go
 
 go 1.18
 

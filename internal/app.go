@@ -6,6 +6,6 @@ type App struct {
 
 func GetApp() App {
 	return App{
-		Name: "DotsBoilerplates/go",
+		Name: "warpspeedboilerplate/go/go",
 	}
 }

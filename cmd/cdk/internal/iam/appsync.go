@@ -8,8 +8,8 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscognito"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 
-	"github.com/davemackintosh/go/internal/cdkutils"
-	"github.com/davemackintosh/go/internal/utils"
+	"github.com/warpspeedboilerplate/go/internal/cdkutils"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 func GetAppSyncIAMRoles(stack awscdk.Stack, api awsappsync.CfnGraphQLApi, userPool awscognito.UserPool, userPoolclient awscognito.UserPoolClient, identityPool awscognito.CfnIdentityPool) awscognito.CfnIdentityPoolRoleAttachment { //nolint: ireturn

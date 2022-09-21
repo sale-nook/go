@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/davemackintosh/go/internal/utils"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 func Test_ToPointer(t *testing.T) {

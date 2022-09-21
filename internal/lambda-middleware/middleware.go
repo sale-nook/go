@@ -6,8 +6,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 
-	"github.com/davemackintosh/go/config"
-	"github.com/davemackintosh/go/internal/types"
+	"github.com/warpspeedboilerplate/go/config"
+	"github.com/warpspeedboilerplate/go/internal/types"
 )
 
 var ErrEnvironmentConfigNotFound = errors.New("environmentConfig error")

@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/davemackintosh/go/internal"
-	"github.com/davemackintosh/go/internal/dal"
+	"github.com/warpspeedboilerplate/go/internal"
+	"github.com/warpspeedboilerplate/go/internal/dal"
 )
 
 func TestTables(t *testing.T) {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/davemackintosh/go/config"
-	lambdamiddleware "github.com/davemackintosh/go/internal/lambda-middleware"
+	"github.com/warpspeedboilerplate/go/config"
+	lambdamiddleware "github.com/warpspeedboilerplate/go/internal/lambda-middleware"
 )
 
 func EnvironmentConfig[Args any, Reply any](ctx context.Context, invocation *lambdamiddleware.Chain[Args, Reply]) (*Reply, error) {

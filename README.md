@@ -1,8 +1,8 @@
 # go
 
-![Backend Build status](https://github.com/davemackintosh/go/actions/workflows/go.yml/badge.svg?branch=main)
-![Frontend Build status](https://github.com/davemackintosh/go/actions/workflows/web.yml/badge.svg?branch=main)
-[![codecov](https://codecov.io/gh/davemackintosh/go/branch/main/graph/badge.svg?token=milTNQGLWc)](https://codecov.io/gh/davemackintosh/go)
+![Backend Build status](https://github.com/warpspeedboilerplate/go/actions/workflows/go.yml/badge.svg?branch=main)
+![Frontend Build status](https://github.com/warpspeedboilerplate/go/actions/workflows/web.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/gh/warpspeedboilerplate/go/branch/main/graph/badge.svg?token=milTNQGLWc)](https://codecov.io/gh/warpspeedboilerplate/go)
 
 <blockquote style="text-align: center; text-transform: uppercase">⚠️ This boilerplate requires configuration before use!!! Follow the instructions below carefully. ⚠️</blockquote>
 <blockquote>💰 NOTE: Current running costs are unknown, but I will add these as the data becomes more transparent.</blockquote>

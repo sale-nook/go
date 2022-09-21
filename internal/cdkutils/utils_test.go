@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/davemackintosh/go/internal"
-	"github.com/davemackintosh/go/internal/cdkutils"
+	"github.com/warpspeedboilerplate/go/internal"
+	"github.com/warpspeedboilerplate/go/internal/cdkutils"
 )
 
 func TestNameWithEnvironment(t *testing.T) {

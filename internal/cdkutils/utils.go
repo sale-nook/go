@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/davemackintosh/go/internal"
+	"github.com/warpspeedboilerplate/go/internal"
 )
 
 func trimAllPrefixes(name, prefix string) string {

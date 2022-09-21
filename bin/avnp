@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # A wrapper around aws-vault that will automatically run aws-vault exec.
-aws-vault exec dotsboilerlates/go -- "$@"
+aws-vault exec warpspeedboilerplate/go -- "$@"

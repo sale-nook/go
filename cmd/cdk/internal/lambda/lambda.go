@@ -14,10 +14,10 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsssm"
 	"github.com/aws/aws-cdk-go/awscdklambdagoalpha/v2"
 
-	"github.com/davemackintosh/go/cmd/cdk/internal"
-	"github.com/davemackintosh/go/cmd/cdk/internal/iam"
-	binternal "github.com/davemackintosh/go/internal"
-	"github.com/davemackintosh/go/internal/utils"
+	"github.com/warpspeedboilerplate/go/cmd/cdk/internal"
+	"github.com/warpspeedboilerplate/go/cmd/cdk/internal/iam"
+	binternal "github.com/warpspeedboilerplate/go/internal"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 type FunctionProps struct {

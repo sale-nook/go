@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/davemackintosh/go/cmd/cdk/internal"
+	"github.com/warpspeedboilerplate/go/cmd/cdk/internal"
 )
 
 func Test_InfraAccountAndRegion(t *testing.T) {

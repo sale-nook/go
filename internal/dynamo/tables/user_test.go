@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/davemackintosh/go/internal/dynamo/tables"
+	"github.com/warpspeedboilerplate/go/internal/dynamo/tables"
 )
 
 const (

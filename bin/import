@@ -12,7 +12,7 @@ function import {
 		if [ "$2" = "-v" ]; then
 			echo "sourcing $1 -> $(pwd)/bin/$1"
 		fi
-		source $file
+		source "$file"
 	else
 		echo "Import not found: $file"
 	fi

@@ -1,6 +1,6 @@
 package dal
 
-import "github.com/davemackintosh/go/internal/cdkutils"
+import "github.com/warpspeedboilerplate/go/internal/cdkutils"
 
 const (
 	TableNamesAWSAppSyncGoUser string = "go_user"

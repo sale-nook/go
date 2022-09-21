@@ -4,8 +4,8 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 
-	"github.com/davemackintosh/go/internal/dal"
-	"github.com/davemackintosh/go/internal/utils"
+	"github.com/warpspeedboilerplate/go/internal/dal"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 type PolicyNamesRoles string

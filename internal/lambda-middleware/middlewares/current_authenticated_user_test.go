@@ -6,10 +6,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	lambdamiddleware "github.com/davemackintosh/go/internal/lambda-middleware"
-	"github.com/davemackintosh/go/internal/lambda-middleware/middlewares"
-	"github.com/davemackintosh/go/internal/types"
-	"github.com/davemackintosh/go/internal/utils"
+	lambdamiddleware "github.com/warpspeedboilerplate/go/internal/lambda-middleware"
+	"github.com/warpspeedboilerplate/go/internal/lambda-middleware/middlewares"
+	"github.com/warpspeedboilerplate/go/internal/types"
+	"github.com/warpspeedboilerplate/go/internal/utils"
 )
 
 type TestResponse struct {
