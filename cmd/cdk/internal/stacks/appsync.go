@@ -189,7 +189,7 @@ func getUserPoolClient(stack awscdk.Stack, userPool awscognito.UserPool) awscogn
 	return userPoolClient
 }
 
-func getCognitoUserPool(stack awscdk.Stack, infra *internal.InfraEntities) awscognito.UserPool { //nolint:ireturn
+func getUserPool(stack awscdk.Stack, infra *internal.InfraEntities) awscognito.UserPool { //nolint:ireturn
 	poolName := cdkutils.NameWithEnvironment("users")
 
 	userPool := awscognito.NewUserPool(stack, &poolName, &awscognito.UserPoolProps{
@@ -201,6 +201,11 @@ func getCognitoUserPool(stack awscdk.Stack, infra *internal.InfraEntities) awsco
 		AccountRecovery: awscognito.AccountRecovery_EMAIL_ONLY,
 		RemovalPolicy:   awscdk.RemovalPolicy_DESTROY, //nolint: nosnakecase
 	})
+
+	userPoolGroups := iam.GetUserPoolGroups()
+	for id, group := range userPoolGroups {
+		awscognito.NewCfnUserPoolGroup(stack, utils.ToPointer(id), group)
+	}
 
 	exportNames := internal.ExportNames()
 	awscdk.NewCfnOutput(stack, exportNames.UserPoolID, &awscdk.CfnOutputProps{
@@ -269,7 +274,7 @@ func NewAppsyncStack(app awscdk.App, infra *internal.InfraEntities) (awscdk.Stac
 		Env: env,
 	})
 
-	userPool := getCognitoUserPool(stack, infra)
+	userPool := getUserPool(stack, infra)
 	userPoolClient := getUserPoolClient(stack, userPool)
 	appsync := getAppSyncAPI(stack, userPool)
 	identityPool := getUserIdentityPool(stack, userPool, userPoolClient)
