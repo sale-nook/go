@@ -3,7 +3,7 @@ module github.com/warpspeedboilerplate/go
 go 1.18
 
 require (
-	github.com/aws/aws-cdk-go/awscdk/v2 v2.37.1
+	github.com/aws/aws-cdk-go/awscdk/v2 v2.44.0
 	github.com/aws/aws-cdk-go/awscdklambdagoalpha/v2 v2.37.1-alpha.0
 	github.com/aws/aws-lambda-go v1.34.1
 	github.com/aws/aws-sdk-go-v2 v1.16.11
@@ -27,8 +27,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.12 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.11.17 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.13 // indirect
-	github.com/aws/constructs-go/constructs/v10 v10.1.77 // indirect
-	github.com/aws/jsii-runtime-go v1.65.0 // indirect
+	github.com/aws/constructs-go/constructs/v10 v10.1.108 // indirect
+	github.com/aws/jsii-runtime-go v1.68.0 // indirect
 	github.com/aws/smithy-go v1.12.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
