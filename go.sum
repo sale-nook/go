@@ -1,7 +1,8 @@
 github.com/Masterminds/semver/v3 v3.1.1 h1:hLg3sBzpNErnxhQtUy/mmLR2I9foDujNK030IGemrRc=
 github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
-github.com/aws/aws-cdk-go/awscdk/v2 v2.37.1 h1:v6sUQSe2619ZCJuqSTENjgD7xe0pjyrD9iIJHeSaBVg=
 github.com/aws/aws-cdk-go/awscdk/v2 v2.37.1/go.mod h1:4CRq7lyCSLNh7DhqbGrDlpeRB3J/INAbBHbNqJsT2+M=
+github.com/aws/aws-cdk-go/awscdk/v2 v2.48.0 h1:i8mMZRfmMvtMuInrK0zrRfeDxKgw5qiX4Aj9RzgEwEM=
+github.com/aws/aws-cdk-go/awscdk/v2 v2.48.0/go.mod h1:nMR9MJO6qftNCYtpLmgYALLVbhhrspHyb8953Zh9Mg0=
 github.com/aws/aws-cdk-go/awscdklambdagoalpha/v2 v2.37.1-alpha.0 h1:q2JGK5OMnzV0x7Ss9vNFynxlxHBFbNvHi585fBW40dQ=
 github.com/aws/aws-cdk-go/awscdklambdagoalpha/v2 v2.37.1-alpha.0/go.mod h1:bSnbnNhya7uQbSauS7XlS608app2pumIwPfKaLgzMwE=
 github.com/aws/aws-lambda-go v1.34.1 h1:M3a/uFYBjii+tDcOJ0wL/WyFi2550FHoECdPf27zvOs=
@@ -37,12 +38,11 @@ github.com/aws/aws-sdk-go-v2/service/sso v1.11.17/go.mod h1:mS5xqLZc/6kc06IpXn5v
 github.com/aws/aws-sdk-go-v2/service/sts v1.16.13 h1:dl8T0PJlN92rvEGOEUiD0+YPYdPEaCZK0TqHukvSfII=
 github.com/aws/aws-sdk-go-v2/service/sts v1.16.13/go.mod h1:Ru3QVMLygVs/07UQ3YDur1AQZZp2tUNje8wfloFttC0=
 github.com/aws/constructs-go/constructs/v10 v10.1.65/go.mod h1:nJzXC/q76n0XkbL76eG0OvJQwbD/lWc7sjerJEARubA=
-github.com/aws/constructs-go/constructs/v10 v10.1.77 h1:2UEcwsqzoPxSy+/hq5uPQZtNZw+NeQmonc8ps04rIYI=
-github.com/aws/constructs-go/constructs/v10 v10.1.77/go.mod h1:SqKMUVAlGEmcw+6dzpqhMyc76I6hqDKDJh/roKipeNU=
+github.com/aws/constructs-go/constructs/v10 v10.1.140 h1:H5fbjPygAhngjHix1voFqOdxmtHyqaeL4YuZAJbNjlk=
+github.com/aws/constructs-go/constructs/v10 v10.1.140/go.mod h1:L6ZTlHmRRQiWl8EAyoItmg9qUDvHmJ3PPFkAG91GRDw=
 github.com/aws/jsii-runtime-go v1.63.2/go.mod h1:Dq2QkYFSpiHGabsCBMmLnnGkyx3lnf5k6C6fq8RN/90=
-github.com/aws/jsii-runtime-go v1.64.0/go.mod h1:Dq2QkYFSpiHGabsCBMmLnnGkyx3lnf5k6C6fq8RN/90=
-github.com/aws/jsii-runtime-go v1.65.0 h1:A6o9DpZD0+IeFrXJ/qBPX7VJne5Vuk2KSfrG5Ez2dz8=
-github.com/aws/jsii-runtime-go v1.65.0/go.mod h1:Dq2QkYFSpiHGabsCBMmLnnGkyx3lnf5k6C6fq8RN/90=
+github.com/aws/jsii-runtime-go v1.70.0 h1:grgd4ZcLn9rApgLOSzll4u3xJsBL4qKbs2McxASqz5g=
+github.com/aws/jsii-runtime-go v1.70.0/go.mod h1:Cd836+6/rhL8LbslPaGofAh8c7H75KVMF6bfHyNl7vY=
 github.com/aws/smithy-go v1.12.1 h1:yQRC55aXN/y1W10HgwHle01DRuV9Dpf31iGkotjt3Ag=
 github.com/aws/smithy-go v1.12.1/go.mod h1:Tg+OJXh4MB2R/uN61Ko2f6hTZwB/ZYGOtib8J3gBHzA=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
